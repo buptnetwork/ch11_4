@@ -13,14 +13,20 @@ import java.util.List;
 public class SysUser implements UserDetails {
     //private
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String username;
     private String password;
-
-
     @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
     private List<SysRole> roles;
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public String getPassword() {
@@ -31,7 +37,6 @@ public class SysUser implements UserDetails {
     public String getUsername() {
         return username;
     }
-
 
     public List<SysRole> getRoles() {
         return roles;
