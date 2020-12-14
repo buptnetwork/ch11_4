@@ -1,5 +1,6 @@
 package cn.edu.bupt.ch11_4.entity;
 
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+@Data
 @Entity
 public class SysUser implements UserDetails {
     //private
@@ -19,32 +21,6 @@ public class SysUser implements UserDetails {
     private String password;
     @ManyToMany(cascade = {CascadeType.REFRESH},fetch = FetchType.EAGER)
     private List<SysRole> roles;
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    public List<SysRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<SysRole> roles) {
-        this.roles = roles;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
